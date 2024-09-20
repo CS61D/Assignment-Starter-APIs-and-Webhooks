@@ -1,19 +1,16 @@
 import { Octokit } from "octokit";
-import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
-
-// Pull request type definition from the GitHub API
-type PR = GetResponseDataTypeFromEndpointMethod<
-  Octokit["rest"]["pulls"]["list"]
->[number];
+import type { PR } from "../types";
 
 // Get all open PRs for the repo
-export const getPRs = async ({
+export const getPR = async ({
   owner,
   repo,
+  pr,
 }: {
   owner: string;
   repo: string;
-}): Promise<PR[]> => {
+  pr: number;
+}): Promise<PR> => {
   // Define the octokit client
   const octokit = new Octokit({
     auth: Bun.env.GITHUB_TOKEN,
@@ -21,12 +18,13 @@ export const getPRs = async ({
 
   // TODO: Get all PRs for the repo
 
-  return [];
+  return null;
 };
 // Test by running > bun run scripts/getPRs.ts
 console.log(
-  await getPRs({
+  await getPR({
     owner: "CS61D",
     repo: "Your-Repo-Name",
+    pr: 1,
   })
 );

@@ -1,10 +1,5 @@
 import { Octokit } from "octokit";
-import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types";
-
-// Pull request type definition from the GitHub API
-type PR = GetResponseDataTypeFromEndpointMethod<
-  Octokit["rest"]["pulls"]["list"]
->[number];
+import type { PR } from "../types";
 
 // Request review for a PR check that the following are true before requesting a review
 // 1. The requested reviewer is not already a reviewer
@@ -21,13 +16,13 @@ export const requestReview = async ({
     auth: Bun.env.GITHUB_TOKEN,
   });
 
-  // TODO: 1. Check if the requested reviewer is not already a reviewer
+  // TODO: Check if the requested reviewer is not already a reviewer
   if (true) {
     console.log("Reviewer already requested for PR number: ", pr.number);
     return;
   }
 
-  // TODO: 2. Ensure the requested reviewer is not the author of the PR
+  // TODO: Ensure the requested reviewer is not the author of the PR
   if (true) {
     console.log(
       "Reviewer is the author of PR number: ",
@@ -43,3 +38,4 @@ export const requestReview = async ({
 
   // TODO: Make a comment telling the author good job
 };
+
